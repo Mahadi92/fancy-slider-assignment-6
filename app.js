@@ -10,7 +10,6 @@ const countDiv = document.getElementById('countImages'); // Count Images || Extr
 // selected image 
 let sliders = [];
 
-
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
@@ -27,13 +26,14 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
-
   })
 
+  //--------- Counting feature || extra feature
   countDiv.innerHTML = `
   <h2 id="countImgH2" class="rounded text-light bg-primary w-25 text-center px-1 py-3"><span class="text-danger bg-dark rounded px-2">${images.length}</span> images found.</h2>
-`; //----------------- Counting feature || extra feature
-  showSpinner(); //--- Loading feature || extra feature
+`;
+  //----------- Loading feature || extra feature
+  showSpinner();
 }
 
 const getImages = (query) => {
@@ -58,11 +58,13 @@ const selectItem = (event, img) => {
   } else {
     sliders.splice(item, 1);
   }
+
   //----------------- Counting feature || extra feature
   countDiv.innerHTML = `
   <h2 id="countImgH2" class="rounded text-light bg-info w-50 text-center py-3">You select <span class="text-warning bg-dark rounded px-2">${sliders.length}</span> images</h2>
 `;
 }
+
 var timer
 const createSlider = () => {
   // check slider image length
@@ -99,7 +101,6 @@ const createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
-
 }
 
 // change slider index 
@@ -128,7 +129,7 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-//Enter button working procedure
+//-----------Enter button working procedure
 searchInput.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
     searchBtn.click();
@@ -145,11 +146,8 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
-// Loading feature
+//-------- Loading feature || extra feature
 function showSpinner() {
   const loading = document.getElementById('spinner');
-  loading.classList.toggle('d-none')
-
-  // const images = document.getElementById('showImages');
-  // images.class.toggle('d-none')
+  loading.classList.toggle('d-none');
 }

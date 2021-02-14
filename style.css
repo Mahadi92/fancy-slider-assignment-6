@@ -1,3 +1,9 @@
+body {
+  background: url(bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 #sliders {
   height: 400px;
   width: 60%;
