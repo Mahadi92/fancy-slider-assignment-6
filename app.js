@@ -4,6 +4,8 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const countDiv = document.getElementById('countImages'); // Count Images || Extra features
+
 // selected image 
 let sliders = [];
 
@@ -26,9 +28,11 @@ const showImages = (images) => {
     gallery.appendChild(div)
 
   })
-  document.getElementById('countImgH2').style.display = "block"
-  document.getElementById('count-all-images').innerText = images.length;
-  showSpinner();
+
+  countDiv.innerHTML = `
+  <h2 id="countImgH2" class="text-primary">Find image for you: <span class="text-danger">${images.length}</span></h2>
+`; //----------------- Counting feature || extra feature
+  showSpinner(); //--- Loading feature || extra feature
 }
 
 const getImages = (query) => {
@@ -50,8 +54,13 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
+  } else {
+    sliders.splice(item, 1);
   }
-
+  //----------------- Counting feature || extra feature
+  countDiv.innerHTML = `
+  <h2 id="countImgH2" class="text-primary">You Select <span class="text-success">${sliders.length}</span> images</h2>
+`;
 }
 var timer
 const createSlider = () => {
@@ -73,7 +82,8 @@ const createSlider = () => {
 
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = Math.abs(document.getElementById('duration').value) * 1000 || 1000;
+  countDiv.style.display = 'none';
+  const duration = Math.abs(document.getElementById('duration').value) || 1000;
 
   sliders.forEach(slide => {
     let item = document.createElement('div')
