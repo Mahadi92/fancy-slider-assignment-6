@@ -1,6 +1,7 @@
 const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
+const searchInput = document.getElementById('search')
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
@@ -30,7 +31,7 @@ const showImages = (images) => {
   })
 
   countDiv.innerHTML = `
-  <h2 id="countImgH2" class="text-primary">Find image for you: <span class="text-danger">${images.length}</span></h2>
+  <h2 id="countImgH2" class="rounded text-light bg-primary w-25 text-center px-1 py-3"><span class="text-danger bg-dark rounded px-2">${images.length}</span> images found.</h2>
 `; //----------------- Counting feature || extra feature
   showSpinner(); //--- Loading feature || extra feature
 }
@@ -59,7 +60,7 @@ const selectItem = (event, img) => {
   }
   //----------------- Counting feature || extra feature
   countDiv.innerHTML = `
-  <h2 id="countImgH2" class="text-primary">You Select <span class="text-success">${sliders.length}</span> images</h2>
+  <h2 id="countImgH2" class="rounded text-light bg-info w-50 text-center py-3">You select <span class="text-warning bg-dark rounded px-2">${sliders.length}</span> images</h2>
 `;
 }
 var timer
@@ -128,7 +129,7 @@ const changeSlide = (index) => {
 }
 
 //Enter button working procedure
-document.getElementById('search').addEventListener('keypress', function (event) {
+searchInput.addEventListener('keypress', function (event) {
   if (event.key === 'Enter') {
     searchBtn.click();
   }
@@ -137,15 +138,13 @@ document.getElementById('search').addEventListener('keypress', function (event) 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
-  const search = document.getElementById('search');
-  getImages(search.value)
+  getImages(searchInput.value)
   sliders.length = 0;
 })
 
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
-
 // Loading feature
 function showSpinner() {
   const loading = document.getElementById('spinner');
