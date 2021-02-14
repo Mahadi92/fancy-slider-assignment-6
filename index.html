@@ -13,6 +13,15 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background: url(bg.jpg);
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -24,7 +33,20 @@
       </div>
       <button type="button" id="search-btn" class="btn btn-primary mb-2">Search</button>
     </div>
-    <section class="images">
+
+    <!-- Spinner -->
+    <div class="d-flex justify-content-center">
+      <div id="spinner" class="spinner-border text-primary d-none" role="status">
+        <span class="visually-hidden"></span>
+      </div>
+    </div>
+
+    <!-- counting || extra feature  -->
+    <div class="cotainer">
+      <h2 id="countImgH2" class="text-primary">Find image for you: <span id="count-all-images" ></span></h2>
+    </div>
+
+    <section id="showImages" class="images">
       <div class="justify-content-around align-items-center mt-3 gallery-header mb-2">
         <h3 class="head-title text-center">Select image for create slider</h3>
         <div class="input-group col-md-3 mb-2 mb-md-0">

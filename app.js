@@ -24,11 +24,15 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
-  })
 
+  })
+  document.getElementById('countImgH2').style.display = "block"
+  document.getElementById('count-all-images').innerText = images.length;
+  showSpinner();
 }
 
 const getImages = (query) => {
+  showSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -47,6 +51,7 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   }
+
 }
 var timer
 const createSlider = () => {
@@ -63,9 +68,9 @@ const createSlider = () => {
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
-
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
+
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = Math.abs(document.getElementById('duration').value) * 1000 || 1000;
@@ -83,6 +88,7 @@ const createSlider = () => {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
+
 }
 
 // change slider index 
@@ -129,3 +135,12 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+// Loading feature
+function showSpinner() {
+  const loading = document.getElementById('spinner');
+  loading.classList.toggle('d-none')
+
+  // const images = document.getElementById('showImages');
+  // images.class.toggle('d-none')
+}
